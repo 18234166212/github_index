@@ -1,0 +1,181 @@
+*{margin:0;
+  padding: 0;}
+.clear{
+    clear: both;}
+li{list-style: none;}
+a{text-decoration: none;}
+/*头部*/
+header{
+    background:#47595a;}
+header>div{width: 1200px;
+    background:#47595a;
+    margin: 0 auto;}
+.img{float: left;}
+header>div>ul{margin-left: 70px;
+    overflow: hidden;}
+header>div>ul>li{
+    height: 62px;
+    float: left;
+    margin-left: 30px;}
+header>div>ul>li>a,header>div>ul>li>span{color: #909596;
+    line-height: 62px;}
+header>div>ul>li.lis{margin-left: 320px;}
+/*导航*/
+nav{width: 1110px;
+    margin: 0 auto;}
+nav>div{
+    border-bottom: 1px solid #cccccc;  }
+nav>div>ul{margin-top: 20px;
+    height: 40px;}
+nav>div>ul>li{
+    height: 20px;
+    float: left;
+    padding:10px;  }
+nav>div>ul>li.li_one{
+    height: 18px;
+    line-height: 20px;
+    border: 1px solid #cccccc;
+    border-bottom:2px solid #ffffff;
+    border-radius: 3px;  }
+nav>div>ul>li.li_two>span{
+    color:#337ab7;}
+nav>div>ul>li>img{margin-right:5px;}
+
+/*内容*/
+h2{
+    font-weight: 500;
+    font-size: 16px;
+    color:#337ab7;
+    margin: 10px 0 0  15px;}
+.content{
+    width: 1110px;
+    margin: 0 auto;
+    overflow: hidden;}
+.content1{
+    margin-top: 20px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;}
+.content_header{height: 54px;
+    background: #f5f5f5;
+    border-bottom: 1px solid #dddddd;
+    overflow: hidden;}
+.content_header>ul.ul_one{margin:10px 15px;
+    border:1px solid #cccccc;
+    border-radius:8px;
+    height: 34px;
+    width: 266px;
+    float: left;
+    background: #ffffff;}
+.content_header>ul.ul_one>li{
+    height: 34px;
+    float: left;
+    line-height: 34px;
+    padding: 0 10px;
+    border-left:1px solid #cccccc;  }
+.content_li_one{
+    border-bottom-left-radius:8px ;
+    border-top-left-radius:8px ;
+    background: #337ab7;
+}
+.content_header>ul>li>a{
+    color: #000000;
+}
+.ul_two{margin:10px 0;
+    border:1px solid #cccccc;
+    border-radius:8px;
+    height: 34px;
+    float: left;
+    width: 90px;
+    background: #ffffff;}
+.ul_two>div{float: left;
+    line-height: 34px;
+    text-align: center;}
+.div_one{width: 60px;}
+.div_two{width: 26px;
+    border-left:1px solid #cccccc;  }
+.ul_three{
+    float: left;
+}
+.ul_three{line-height: 54px;
+    margin:10px 0 10px 600px;}
+.ul_three>li{
+    padding-right: 10px;
+    float: left;
+    height: 34px;
+    line-height: 34px;
+    color: #dddddd;
+}
+.ul_three>li.zui>a{padding-right: 10px;
+    color: #5da8db;}
+.ul_three>li.re>a{
+    color: #999999;
+}
+.content2{
+    overflow: hidden;}
+.content2>li{
+    width: 246px;
+    height: 208px;
+    border:1px solid #cccccc;
+    float: left;
+    margin:15px 14px 0 14px; }
+.content2>li>img{
+    margin: 4px;}
+.ye{overflow: hidden;
+    margin-top:40px;
+    margin-bottom: 30px;
+    text-align: center;}
+.shag,.xia{
+    display: inline-block;
+    width: 73px;
+    height: 30px;
+    border: 1px solid #cccccc;
+    border-radius: 20px;
+    font-size: 14px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 30px;}
+.shag{color: #999999;}
+.xia{color: #338ac4;}
+/*footer*/
+footer{background: #343c3f;
+    margin-top: 20px;}
+footer>div.ff{
+    background: #343c3f;
+    overflow: hidden;
+    width: 1110px;
+    margin: 0 auto;}
+footer>div.ff>ul.footer{
+    margin-top: 70px;}
+footer>div.ff>ul.footer>li{float: left;}
+.li_first{width: 336px;
+    margin-right: 115px;}
+.li_first>div{
+    margin-top: 42px;
+    color: #ccc7c3;}
+.li_first>ul{
+    margin-top: 35px;}
+.li_first>ul>li{float: left;
+    margin-right: 13px;}
+.li_second{
+    margin-right: 100px;}
+.li_second>ul>li,.li_third>ul>li{
+    color: #cccccc;}
+.li_second>ul>li.li_oo,.li_third>ul>li.li_oo{
+    margin-bottom: 30px;}
+.li_second>ul>li.li_oo1,.li_third>ul>li.li_oo1{
+    margin-top: 20px;}
+.li_third{margin-right: 133px;}
+.li_third>ul>li>img{
+    line-height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 3px;}
+.li_four>ul>li.li_o{margin-bottom: 20px;
+    color: #cccccc;}
+address{margin-top:60px; }
+address>div.di{
+    border-top: 1px solid #404a4e;
+    height: 116px;
+    text-align: center;
+    line-height: 116px;
+    color: #cccccc;}
