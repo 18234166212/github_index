@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="js/react.js"></script>
+  <script src="js/react-dom.js"></script>
+  <script src="js/browser.min.js"></script>
+</head>
+<body>
+
+<div id="example"></div>
+
+<script type="text/babel">
+
+  var array = [
+  <h2>Hello</h2>,
+  <h3>JSX</h3>
+  ]
+
+  ReactDOM.render(
+  <div>
+    <p>{2+3}</p>
+    {array}
+    <p>{3>2?'true':'false'}</p>
+  </div>,
+  document.getElementById('example')
+  )
+
+</script>
+
+</body>
+</html>
