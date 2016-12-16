@@ -1,0 +1,137 @@
+/*去除默认样式*/
+*{
+    margin:0;
+    padding: 0;
+}
+a{text-decoration: none;
+    font-size: 14px;}
+li{list-style: none;}
+/*头部样式*/
+.header{
+    height:50px;
+    background-color:#949494;
+}
+.header>.header_content{
+    margin-left: 30px;
+}
+.header>.header_content>ul>li{
+    float: left;
+    margin-right: 5px;
+}
+.header>.header_content>ul>li>a{
+    line-height: 50px;
+    color: #ffffff;
+    font-weight: bold;
+}
+.header>.header_content>ul>li>img{
+    padding-top: 12px;
+}
+/*内容区样式*/
+.content{
+    background-color: #E4E4E4;
+    overflow: hidden;
+}
+.content_top{
+    margin: 20px;
+    overflow: hidden;
+}
+.content_top_left,.content_top_right{
+    float: left;
+}
+.content_top_left{line-height: 40px;}
+label{
+    font-size: 17px;
+    font-weight: bold;
+}
+input,select{
+    margin-right: 40px;
+}
+input{width: 160px;
+    height: 33px;  }
+.select_one{
+    width: 152px;
+    height: 33px;
+}
+.select_two{
+    width: 122px;
+    height: 33px;
+}
+.select_three{
+    width: 80px;
+    height: 33px;
+}
+.content_top_right>div{
+    float: left;
+    line-height: 40px;
+    text-align: center;
+}
+.one{
+    width: 80px;
+    height: 40px;
+    background-color: #797979;
+    border-radius: 10px;
+    margin-right: 30px;
+}
+.two{
+    width: 100px;
+    height: 40px;
+    background-color: #797979;
+    border-radius: 10px;
+    margin-right: 30px;
+}
+.three{
+    width: 110px;
+    height: 40px;
+    background-color: #169BD5;
+    border-radius: 10px;
+}
+#search{margin-left: 45px;}
+/*内容区中间部分*/
+.content_middle{
+    background: #ffffff;
+    margin: 0 35px 0 20px;
+    border-radius: 5px;
+}
+.content_middle>.product{
+    margin:0 60px 0 10px  ;
+}
+.product,.page{font-size: 14px;
+    color: #797979;}
+.content_middle>ul{
+    float: right;
+}
+.content_middle>ul>li{
+    float: left;
+    margin-right: 40px;
+}
+.content_middle>ul>li>a{
+    color: #000000;
+}
+.content_middle>ul>li>a.lastPage{color: #bcbcbc;}
+.content_middle>ul>li>a.nextPage{color: #515151;}
+.content_middle>ul>li.whichPage{color: #515151;}
+/*内容区表格部分*/
+table{width: 1300px;
+    margin-left: 20px;
+    margin-top: 10px;
+    border-collapse: collapse;
+    background-color: #ffffff;}
+table>thead>tr,table>thead>tr>th,table>tbody>tr,table>tbody>tr>td{
+    border:1px solid #797979;
+}
+table>thead>tr>th{
+    font-weight: 100;
+    font-size: 14px;
+}
+table>thead>tr>th{height: 30px;}
+table>tbody>tr>td{height: 40px;
+    width: 260px;
+    text-align: center;}
+table>tbody>tr>td>div{
+    float: left;
+    width: 60px;
+    height: 25px;
+    margin-left: 30px;
+    background-color: #169BD5;
+    border-radius: 5px;
+}

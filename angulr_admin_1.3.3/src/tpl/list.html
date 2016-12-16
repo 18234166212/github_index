@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>保险</title>
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet" href="../css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="../css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../css/font.css" type="text/css" />
+    <link rel="stylesheet" href="../css/app.css" type="text/css" />
+
+    <script src="../../frameworks/jquery-2.1.4/jquery.min.js"></script>
+    <script src="../../frameworks/angular-1.4.0/angular.min.js"></script>
+    <script src="../../frameworks/angular-1.4.0/angular-route.min.js"></script>
+    <script src="../js/controllers/list.js"></script>
+</head>
+<body ng-controller="mainCtrl">
+<!--头部-->
+    <div class="header">
+        <div class="header_content">
+            <ul>
+                <li><a>保险产品管理</a></li>
+                <li><img src="../../images/2.png" alt=""></li>
+                <li><a>寿险</a></li>
+            </ul>
+        </div>
+    </div>
+<!--内容区-->
+    <div class="content">
+        <div class="content_top">
+            <div class="content_top_left">
+                <label>产品:</label><input type="text" placeholder="输入产品名称/备案号">
+                <label>公司:</label>
+                <select class="select_one">
+                    <option value="">输入公司名称关键字</option>
+                    <option value="">全部</option>
+                    <option value="">公司名称1</option>
+                    <option value="">公司名称2</option>
+                    <option value="">公司名称3</option>
+                    <option value="">公司名称4</option>
+                    <option value="">公司名称5</option>
+                </select>
+                <label>险种:</label>
+                <select class="select_two">
+                    <option value="">请选择</option>
+                    <option value="">意外保险</option>
+                    <option value="">健康医疗</option>
+                    <option value="">养老推荐</option>
+                    <option value="">人寿保险</option>
+                    <option value="">重大疾病</option>
+                    <option value="">投资理财</option>
+                </select>
+                <label>状态:</label>
+                <select class="select_three">
+                    <option value="">全部</option>
+                    <option value="">上架</option>
+                    <option value="">下架</option>
+                </select>
+            </div>
+            <div class="content_top_right">
+                <div class="one" id="search">查找</div>
+                <div class="two">批量上下架</div>
+                <div class="three">添加新产品</div>
+            </div>
+        </div>
+        <!--内容区中间部分-->
+        <div class="content_middle">
+            <span class="product">共找到128个产品</span>
+            <span class="page">每页显示:</span>
+            <select id="pageSize" ng-change="onChange(value)" ng-model="myOption" ng-options="option.index for option in options">
+
+            </select>
+            <ul>
+                <li><a href="#" class="lastPage">上一页</a></li>
+                <li><a href="#" class="nextPage">下一页</a></li>
+                <li class="whichPage">1/28页</li>
+            </ul>
+        </div>
+        <!--内容区表格部分-->
+        <table>
+            <thead>
+                <tr>
+                    <th>序列号</th>
+                    <th>产品名称</th>
+                    <th>所属公司</th>
+                    <th>险种标签</th>
+                    <th>主附类别</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr  ng-repeat="list in lists">
+                    <td style="width: 100px;">{{list.id}}</td>
+                    <td>{{list.name}}</td>
+                    <td>{{list.companyName}}</td>
+                    <td>{{list.label}}</td>
+                    <td  style="width: 120px;">{{list.type}}</td>
+                    <td  style="width: 100px;" class="status">{{list.status}}</td>
+                    <td><div>编辑</div><div ng-click="show()"></div></td>
+                </tr>
+            </tbody>
+        </table>
+        {{statu}}
+        {{lists}}
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </div>
+</body>
+</html>
