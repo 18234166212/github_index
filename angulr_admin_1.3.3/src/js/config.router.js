@@ -30,14 +30,14 @@ angular.module('app')
                         resolve: {
                             deps: ['$ocLazyLoad',
                                 function ($ocLazyLoad) {
-                                    return $ocLazyLoad.load('ui.select').then(
+                                    return $ocLazyLoad.load(['ui.select','textAngular']).then(
                                         function () {
                                             return $ocLazyLoad.load([
                                                 'js/controllers/form_data.js',
                                                 'js/services/imageUpServe.js',
                                                 'js/services/commonService.js',
-                                                'js/directives/radioOption.js',
                                                 'js/directives/guaranteePeriod.js',
+                                                'js/directives/commonDirectives.js',
                                             ]);
                                         }
                                     );
@@ -259,20 +259,6 @@ angular.module('app')
                                 }]
                         }
                     })
-                    // .state('app.form.elements', {
-                    //     url: '/myImage',
-                    //     templateUrl: 'tpl/form_elements.html',
-                    //     resolve: {
-                    //         deps: ['$ocLazyLoad',
-                    //             function( $ocLazyLoad){
-                    //                 return $ocLazyLoad.load('ngImgCrop').then(
-                    //                     function(){
-                    //                         return $ocLazyLoad.load('js/controllers/imgcrop.js');
-                    //                     }
-                    //                 );
-                    //             }]
-                    //     }
-                    // })
                     .state('app.form.select', {
                         url: '/select',
                         templateUrl: 'tpl/form_select.html',

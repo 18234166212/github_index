@@ -1,14 +1,8 @@
 .main_xian,.main_xian_one,.main_xian_two{
     display:none;
 }
-.qujian{
-    display:none;
-}
 .add_project{
     margin-left:45%;
-}
-.add_new{
-    height: 26px;
 }
 .date_jiaofei{
     position: relative;
@@ -27,16 +21,13 @@
 .add_tiaokuan{
     margin-left: 45%;
 }
-.add_zhuxian{
-    display: none;
-}
-.SexDate,.diffSexFixDate,.differentSexDate{
-    display:none;
-}
 .sex{
     font-size: 14px;
     font-weight: bold;
 }
-.qujianAge{
-    display: none;
+.add{
+    margin-left: 800px;
 }
+.WrapperDisease{width: 600px;
+    margin-left: 160px;}
+

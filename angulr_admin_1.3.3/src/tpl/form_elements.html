@@ -11,30 +11,27 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="font-bold" style="padding-left:15px">产品列表封面图
-                            <input type="file" id="fileListInput" file-model="myFile"/>
+                            <input type="file" class="abc"  id="fileListInput" file-model="myFile"/>
                         </div>
                         <div class="panel-body" style=" border:1px solid #ffffff;">
                             <img src="../images/1.jpg" style="width:400px;height: 210px;"
                                  file-model="myFile" ng-src="{{productPicture}}"/>
                         </div>
-                        <!--</div>-->
                     </div>
                     <div class="col-sm-6">
-                        <!--<div class="panel panel-default">-->
                         <div class="font-bold" style="padding-left:15px">产品计划书封面图
                             <input type="file" id="fileInput" file-model="myFile"/>
                         </div>
                         <div class="panel-body">
                             <img src="../images/1.jpg" ng-src="{{planPicture}}" style="width:400px;height: 210px;"/>
                         </div>
-                        <!--</div>-->
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">产品全称</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" maxlength="50"
-                               ng-model="formData.name" name="name">
+                               ng-model="formData.company.name" name="name">
                     </div>
                 </div>
                 <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -77,82 +74,84 @@
                     <div class="col-sm-10">
                         <div class="radio col-sm-4" ng-repeat="typeItem in insuranceTypes">
                             <label>
-                                <input type="radio" name="type" ng-model="typeItem.default"
-                                       ng-click="onTypeSelectChange(typeItem.value)"  ng-value="typeItem.value" >
+                                <input type="radio" name="type" ng-checked="typeItem.default"
+                                       ng-click="onTypeSelectChange(typeItem.value)" ng-value="typeItem.value">
                                 {{typeItem.name}}
                             </label>
                         </div>
                     </div>
                 </div>
-                <div class="fujia_xian">
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">添加附加险</label>
-                    <div class="col-sm-6" >
-                        <ui-select  theme="bootstrap"  ng-model="fujia_productName.name"  ng-change="selectFujiaValueChange(fujia_productName.name)">
-                            <ui-select-match placeholder="输入产品名称关键词" class="searchProductName">
-                                {{$select.selected.name}}
-                            </ui-select-match>
-                            <ui-select-choices repeat="item in fujia_productNames | filter: $select.search">
-                                <div ng-bind-html="item.name | highlight: $select.search"></div>
-                            </ui-select-choices>
-                        </ui-select>
-                    <div  ng-repeat="fujia_proName in fujia_productNameArr">
-                        <div class="form-group ">
-                            <label class="col-sm-2 control-label "  ng-model="fujia_proName" ng-value="fujia_proName">{{fujia_proName}}</label>
-                            <div class="col-sm-6">
-                                <div class="radio col-sm-6">
-                                    <label >
-                                        <input type="radio" radio-option  name="{{fujia_proName}}"
-                                              data="fujia_xian" value="必须" >
-                                        必须</label>
-                                </div>
-                                <div class="radio col-sm-6">
-                                    <label>
-                                        <input type="radio" radio-option  name="{{fujia_proName}}"
-                                               data="fujia_xian" value="非必须">
-                                        非必须</label>
+                <div class="fujia_xian" ng-show="TypeSelect==1">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">添加附加险</label>
+                        <div class="col-sm-6">
+                            <ui-select theme="bootstrap" ng-model="fujia_productName.name"
+                                       ng-change="selectFujiaValueChange(fujia_productName.name)">
+                                <ui-select-match placeholder="输入产品名称关键词" class="searchProductName">
+                                    {{$select.selected.name}}
+                                </ui-select-match>
+                                <ui-select-choices repeat="item in fujia_productNames | filter: $select.search">
+                                    <div ng-bind-html="item.name | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                            <div ng-repeat="fujia_proName in fujia_productNameArr">
+                                <div class="form-group ">
+                                    <label class="col-sm-2 control-label " ng-model="fujia_proName"
+                                           ng-value="fujia_proName">{{fujia_proName}}</label>
+                                    <div class="col-sm-6">
+                                        <div class="radio col-sm-6">
+                                            <label>
+                                                <input type="radio" name="{{fujia_proName}}" value="必须">
+                                                必须</label>
+                                        </div>
+                                        <div class="radio col-sm-6">
+                                            <label>
+                                                <input type="radio" name="{{fujia_proName}}" value="非必须">
+                                                非必须</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    </div>
-                </div>
 
                 </div>
                 <!--添加主险-->
-                <div class="add_zhuxian">
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">添加主险</label>
-                    <div class="col-sm-6" >
-                        <ui-select  theme="bootstrap"  ng-model="zhuxian_productName.name"  ng-change="selectZhuValueChange(zhuxian_productName.name)">
-                            <ui-select-match placeholder="输入产品名称关键词" class="searchProductName">
-                                {{$select.selected.name}}
-                            </ui-select-match>
-                            <ui-select-choices repeat="item in zhuxian_productNames | filter: $select.search">
-                                <div ng-bind-html="item.name | highlight: $select.search"></div>
-                            </ui-select-choices>
-                        </ui-select>
-                        <div  ng-repeat="zhuxian_proName in zhuxian_productNameArr">
-                            <div class="form-group ">
-                                <label class="col-sm-2 control-label" ng-model="zhuxian_proName" ng-value="zhuxian_proName">{{zhuxian_proName}}</label>
-                                <div class="col-sm-6">
-                                    <div class="radio col-sm-6">
-                                        <label >
-                                            <input type="radio" radio-option name="{{zhuxian_proName}}"
-                                                   data="zhu_xian"   value="必须">
-                                            必须</label>
-                                    </div>
-                                    <div class="radio col-sm-6">
-                                        <label>
-                                            <input type="radio" radio-option name="{{zhuxian_proName}}"
-                                                   data="zhu_xian" value="非必须">
-                                            非必须</label>
+                <div ng-show="TypeSelect==2">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">添加主险</label>
+                        <div class="col-sm-6">
+                            <ui-select theme="bootstrap" ng-model="zhuxian_productName.name"
+                                       ng-change="selectZhuValueChange(zhuxian_productName.name)">
+                                <ui-select-match placeholder="输入产品名称关键词" class="searchProductName">
+                                    {{$select.selected.name}}
+                                </ui-select-match>
+                                <ui-select-choices repeat="item in zhuxian_productNames | filter: $select.search">
+                                    <div ng-bind-html="item.name | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                            <div ng-repeat="zhuxian_proName in zhuxian_productNameArr">
+                                <div class="form-group ">
+                                    <label class="col-sm-2 control-label" ng-model="zhuxian_proName"
+                                           ng-value="zhuxian_proName">{{zhuxian_proName}}</label>
+                                    <div class="col-sm-6">
+                                        <div class="radio col-sm-6">
+                                            <label>
+                                                <input type="radio" radio-option name="{{zhuxian_proName}}"
+                                                       data="zhu_xian" value="必须">
+                                                必须</label>
+                                        </div>
+                                        <div class="radio col-sm-6">
+                                            <label>
+                                                <input type="radio" radio-option name="{{zhuxian_proName}}"
+                                                       data="zhu_xian" value="非必须">
+                                                非必须</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </div>
 
                 <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -162,15 +161,15 @@
                     <div class="col-sm-10">
                         <div class="radio col-sm-4" ng-repeat="money in insuranceMoney">
                             <label>
-                                <input type="radio" name="money" ng-model="money.default"
-                                       ng-value="money.value"   ng-click="onInsuranceMoneyChange(money.value)">
+                                <input type="radio" name="money" ng-checked="money.default"
+                                       ng-value="money.value" ng-click="onInsuranceMoneyChange(money.value)">
                                 {{money.name}}
                             </label>
                         </div>
                     </div>
                 </div>
                 <!--固定值-->
-                <div class="form-group fixValue">
+                <div class="form-group fixValue" ng-show="InsuranceMoney==1">
                     <label class="col-sm-2 control-label">固定值</label>
                     <div class="col-sm-3">
                         <label>
@@ -187,7 +186,7 @@
                     </div>
                 </div>
                 <!--区间值-->
-                <div class="form-group  qujian">
+                <div class="form-group" ng-show="InsuranceMoney==2">
                     <label class="col-sm-2 control-label">区间值： 下限</label>
                     <div class="col-sm-3">
                         <label>
@@ -203,13 +202,13 @@
                             元
                         </label>
                     </div>
-                    <label class="col-sm-3 control-label">购买份数上线</label>
-                    <div class="col-sm-3">
-                        <label>
-                            <input type="text" name="purchaseOnLine" ng-model="formData.purchaseOnLine" checked>
-                            份
-                        </label>
-                    </div>
+                    <!--<label class="col-sm-3 control-label">购买份数上线</label>-->
+                    <!--<div class="col-sm-3">-->
+                    <!--<label>-->
+                    <!--<input type="text" name="purchaseOnLine" ng-model="formData.purchaseOnLine" checked>-->
+                    <!--份-->
+                    <!--</label>-->
+                    <!--</div>-->
                 </div>
                 <!--投保年龄-->
                 <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -218,25 +217,29 @@
                     <div class="col-sm-10">
                         <div class="radio col-sm-4" ng-repeat="age in insuranceAge">
                             <label>
-                                <input type="radio" name="age" ng-model="age.default"
-                                       ng-value="age.value"   ng-click="onInsuranceAgeChange(age.value)">
+                                <input type="radio" name="age" ng-checked="age.default" ng-model="InsuranceAge"
+                                       ng-value="age.value" ng-click="onInsuranceAgeChange(age.value)">
                                 {{age.name}}
                             </label>
                         </div>
                     </div>
                 </div>
                 <!--固定值-->
-                <div class="form-group fixAge">
+                <div class="form-group" ng-show="InsuranceAge==1">
                     <label class="col-sm-2 control-label">固定值</label>
                     <div class="col-sm-3">
                         <label>
-                            <input type="text" name="fixAge" ng-model="formData.fixAge">
+                            男<input type="text" name="fixAge" ng-model="formData.fixAge">
+                            岁
+                        </label>
+                        <label>
+                            女<input type="text" name="fixAge" ng-model="formData.fixAge">
                             岁
                         </label>
                     </div>
                 </div>
                 <!--区间值-->
-                <div class="form-group  qujianAge">
+                <div class="form-group" ng-show="InsuranceAge==2">
                     <label class="col-sm-2 control-label">区间值： 下限</label>
                     <div class="col-sm-3">
                         <label>
@@ -248,9 +251,9 @@
                         </label>
                     </div>
                     <label class="col-sm-2 control-label">上限</label>
-                    <div class="col-sm-3"  >
+                    <div class="col-sm-3">
                         <label>
-                            <input type="text" name="ageOnLine" ng-model="ageOnLineNum"  checked>
+                            <input type="text" name="ageOnLine" ng-model="ageOnLineNum" checked>
                             <select name="age" class="age" ng-model="upPeriod"
                                     ng-options="date.name for date in upDates">
                                 <option>{{date.name}}</option>
@@ -262,203 +265,207 @@
                 <div class="line line-dashed b-b line-lg pull-in"></div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">保障年限</label>
-
                     <label class="col-sm-2 control-label">设置名称：</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" name="guaranteePeriod"
                                ng-model="formData.guaranteePeriodName">
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" ng-click="test1()">
                     <label class="col-sm-2 control-label">选择条件</label>
                     <div class="col-sm-10">
                         <div class="radio col-sm-4" ng-repeat="guaranteeSex in guaranteePeriod_sex">
                             <label>
-                                <input type="radio" name="sex" radio-groups ng-model="guaranteeSex.default"
-                                       ng-value="guaranteeSex.value">
+                                <input type="radio" name="sex" ng-model="$parent.guaranteeSexNum"
+                                       ng-value="guaranteeSex.value" ng-checked="guaranteeSex.default">
                                 {{guaranteeSex.name}}
                             </label>
                         </div>
                     </div>
                     <div class="col-sm-10 col-sm-offset-2">
-                        <div class="radio col-sm-4" ng-repeat="guaranteeDate in guaranteePeriod_date">
+                        <div class="radio col-sm-4" ng-repeat="guaranteePeriod in guaranteePeriod_date">
                             <label>
-                                <input type="radio" name="date" radio-groups ng-model="guaranteeDate.default"
-                                       ng-value="guaranteeDate.value" >
-                                {{guaranteeDate.name}}
+                                <input type="radio" name="date" ng-model="$parent.guaranteePeriodNum"
+                                       ng-value="guaranteePeriod.value" ng-checked="guaranteePeriod.default">
+                                {{guaranteePeriod.name}}
                             </label>
                         </div>
                     </div>
                 </div>
                 <!--不分性别，固定值-->
-                <div class="form-group SexFixDate">
-                    <label class="col-sm-4 control-label">固定值(选择以下一种固定值方式输入)</label>
-                </div>
-                <div class="form-group SexFixDate">
-                    <input type="checkbox" value="option1">
-                    <label class="col-sm-2 control-label">终身</label>
-                </div>
-                <div class="form-group SexFixDate">
-                    <label class="col-sm-2 control-label">周岁</label>
-                    <div class="col-sm-3">
-                        <input type="text" name="optionsText">
+                <div ng-show="result==11">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">固定值(选择以下一种固定值方式输入)</label>
                     </div>
-                </div>
-                <div class="form-group SexFixDate">
-                    <label class="col-sm-2 control-label">年</label>
-                    <div class="col-sm-10">
-                        <input type="text" name="optionsText" class="col-sm-1">
-                        <input type="text" name="optionsText" class="col-sm-1">
-                        <input type="text" name="optionsText" class="col-sm-1">
-                        <input type="text" name="optionsText" class="col-sm-1">
-                        <input type="text" name="optionsText" class="col-sm-1">
-                        <button class="button btn-success">增加</button>
+                    <div class="form-group">
+                        <input type="checkbox" value="option1">
+                        <label class="col-sm-2 control-label">终身</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">周岁</label>
+                        <div class="col-sm-3">
+                            <input type="text" name="optionsText">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">年</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="SexFixValue" class="col-sm-3"
+                                   ng-repeat="SexFixValues in SexFixValueArr" my-blur
+                                   ng-model="SexFixValues.year">
+                        </div>
+                        <button class="button btn-success" class="addYear"
+                                ng-click="addYear()">增加
+                        </button>
+                        <button class="button btn-danger" class="removeYear"
+                                ng-click="removeYear()" ng-show="year==1">删除
+                        </button>
                     </div>
                 </div>
                 <!--不分性别，对应交费期间-->
-                <div class="form-group SexDate">
-                    <label class="col-sm-2 control-label">①</label>
-                    <div class="col-sm-2">
-                        <label class="col-sm-1 control-label">交</label>
-                        <input type="text" name="optionsText" class="col-sm-4">
-                        <label class="control-label">年</label>
+                <div class="form-group" ng-show="result==12">
+                    <div ng-repeat="sexDiffDates in SexDiffDateArr">
+                        <label class="col-sm-2 control-label">{{$index+1}}</label>
+                        <div class="col-sm-2">
+                            <label class="col-sm-1 control-label">交</label>
+                            <input type="text" name="optionsText" class="col-sm-4">
+                            <label class="control-label">年</label>
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="col-sm-1 control-label">保</label>
+                            <input type="text" name="optionsText" class="col-sm-4">
+                            <label class="control-label">年</label>
+                        </div>
                     </div>
-                    <div class="col-sm-2">
-                        <label class="col-sm-1 control-label">保</label>
-                        <input type="text" name="optionsText" class="col-sm-4">
-                        <label class="control-label">年</label>
-                    </div>
-                    <label class="col-sm-1 control-label">②</label>
-                    <div class="col-sm-2">
-                        <label class="col-sm-1 control-label">交</label>
-                        <input type="text" name="optionsText" class="col-sm-4">
-                        <label class="control-label">年</label>
-                    </div>
-                    <div class="col-sm-2">
-                        <label class="col-sm-1 control-label">保</label>
-                        <input type="text" name="optionsText" class="col-sm-4">
-                        <label class="control-label">年</label>
-                    </div>
-                    <div class="col-sm-3 col-sm-offset-8">
-                        <button class="button btn-success" class="col-sm-1">增加一个</button>
-                        <button class="button btn-warning" class="col-sm-1">删除最后一个</button>
+                    <div class="col-sm-3 col-sm-offset-8 text-right">
+                        <button class="button btn-success" class="col-sm-1"
+                                ng-click=" addSexDiffDate()">增加一个
+                        </button>
+                        <button class="button btn-danger" class="col-sm-1"
+                                ng-show="SexDiffDate==1" ng-click="removeSexDiffDate()">删除最后一个
+                        </button>
                     </div>
                 </div>
                 <!--分性别，固定值-->
-                <div class="form-group diffSexFixDate">
-                    <label class="col-sm-4 control-label"><span  class="sex">男：</span>固定值(选择以下一种固定值方式输入)</label>
-                </div>
-                <div class="form-group diffSexFixDate">
-                    <input type="checkbox" value="option1">
-                    <label class="col-sm-2 control-label">终身</label>
-                </div>
-                <div class="form-group diffSexFixDate">
-                    <label class="col-sm-2 control-label">周岁</label>
-                    <div class="col-sm-3">
-                        <input type="text" name="optionsText">
+                <div  ng-show="result==21">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label"><span class="sex">男：</span>固定值(选择以下一种固定值方式输入)</label>
                     </div>
-                </div>
-                <div class="form-group diffSexFixDate">
-                    <label class="col-sm-2 control-label">年</label>
-                    <div class="col-sm-10">
-                        <input type="text" name="optionsText" class="col-sm-1">
-                        <input type="text" name="optionsText" class="col-sm-1">
-                        <input type="text" name="optionsText" class="col-sm-1">
-                        <input type="text" name="optionsText" class="col-sm-1">
-                        <input type="text" name="optionsText" class="col-sm-1">
-                        <button class="button btn-success">增加</button>
+                    <div class="form-group">
+                        <input type="checkbox" value="option1">
+                        <label class="col-sm-2 control-label">终身</label>
                     </div>
-                </div>
-                <div class="form-group diffSexFixDate">
-                    <label class="col-sm-4 control-label"><span  class="sex">女：</span>固定值(选择以下一种固定值方式输入)</label>
-                </div>
-                <div class="form-group diffSexFixDate">
-                    <input type="checkbox" value="option1">
-                    <label class="col-sm-2 control-label">终身</label>
-                </div>
-                <div class="form-group diffSexFixDate">
-                    <label class="col-sm-2 control-label">周岁</label>
-                    <div class="col-sm-3">
-                        <input type="text" name="optionsText">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">周岁</label>
+                        <div class="col-sm-3">
+                            <input type="text" name="optionsText">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group diffSexFixDate">
-                    <label class="col-sm-2 control-label">年</label>
-                    <div class="col-sm-10">
-                        <input type="text" name="optionsText" class="col-sm-1">
-                        <input type="text" name="optionsText" class="col-sm-1">
-                        <input type="text" name="optionsText" class="col-sm-1">
-                        <input type="text" name="optionsText" class="col-sm-1">
-                        <input type="text" name="optionsText" class="col-sm-1">
-                        <button class="button btn-success">增加</button>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">年</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="maleDiffSexFixValue" class="col-sm-3"
+                                   ng-repeat="maleDiffSexFixValues in maleDiffSexFixValueArr" my-blur
+                                   ng-model="maleDiffSexFixValues.year">
+                        </div>
+                        <button class="button btn-success" class="addMaleDiffSexFix"
+                                ng-click="addMaleDiffSexFix()">增加
+                        </button>
+                        <button class="button btn-danger" class="removeMaleDiffSexFix"
+                                ng-click="removeMaleDiffSexFix()" ng-show="removeMaleYear==1">删除
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label"><span class="sex">女：</span>固定值(选择以下一种固定值方式输入)</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" value="option1">
+                        <label class="col-sm-2 control-label">终身</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">周岁</label>
+                        <div class="col-sm-3">
+                            <input type="text" name="optionsText">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">年</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="femaleDiffSexFixValue" class="col-sm-3"
+                                   ng-repeat="femaleDiffSexFixValues in femaleDiffSexFixValueArr" my-blur
+                                   ng-model="femaleDiffSexFixValues.year">
+                        </div>
+                        <button class="button btn-success" class="addFemaleDiffSexFix"
+                                ng-click="addFemaleDiffSexFix()">增加
+                        </button>
+                        <button class="button btn-danger" class="removeMaleDiffSexFix"
+                                ng-click="removeFemaleDiffSexFix()" ng-show="removeFemaleYear==1">删除
+                        </button>
                     </div>
                 </div>
                 <!--分性别，对应交费期间-->
-                <div class="form-group differentSexDate">
-                    <label class="col-sm-2 control-label"><span  class="sex">男：</span>①</label>
-                    <div class="col-sm-2">
-                        <label class="col-sm-1 control-label">交</label>
-                        <input type="text" name="optionsText" class="col-sm-4">
-                        <label class="control-label">年</label>
+                <div ng-show="result==22">
+                    <label><span style="margin-left:100px;">男：</span></label>
+                    <div class="form-group">
+                        <div ng-repeat="maleDiffSexDiffDates in maleDiffSexDiffDateArr">
+                            <label class="col-sm-2 control-label">{{$index+1}}</label>
+                            <div class="col-sm-2">
+                                <label class="col-sm-1 control-label">交</label>
+                                <input type="text" name="optionsText" class="col-sm-4">
+                                <label class="control-label">年</label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="col-sm-1 control-label">保</label>
+                                <input type="text" name="optionsText" class="col-sm-4">
+                                <label class="control-label">年</label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-sm-2">
-                        <label class="col-sm-1 control-label">保</label>
-                        <input type="text" name="optionsText" class="col-sm-4">
-                        <label class="control-label">年</label>
+                    <div class="col-sm-3 col-sm-offset-8 text-right">
+                        <button class="button btn-success" class="col-sm-1"
+                                ng-click=" addMalemale()">增加一个
+                        </button>
+                        <button class="button btn-danger" class="col-sm-1"
+                                ng-show="maleDiffSexDiffDateValue==1" ng-click="removeDiffSexDiffDate()">删除最后一个
+                        </button>
                     </div>
-                    <label class="col-sm-1 control-label">②</label>
-                    <div class="col-sm-2">
-                        <label class="col-sm-1 control-label">交</label>
-                        <input type="text" name="optionsText" class="col-sm-4">
-                        <label class="control-label">年</label>
-                    </div>
-                    <div class="col-sm-2">
-                        <label class="col-sm-1 control-label">保</label>
-                        <input type="text" name="optionsText" class="col-sm-4">
-                        <label class="control-label">年</label>
-                    </div>
-                    <div class="col-sm-3 col-sm-offset-8">
-                        <button class="button btn-success" class="col-sm-1">增加一个</button>
-                        <button class="button btn-warning" class="col-sm-1">删除最后一个</button>
-                    </div>
-                </div>
-                <div class="form-group differentSexDate">
-                    <label class="col-sm-2 control-label"><span class="sex">女：</span>①</label>
-                    <div class="col-sm-2">
-                        <label class="col-sm-1 control-label">交</label>
-                        <input type="text" name="optionsText" class="col-sm-4">
-                        <label class="control-label">年</label>
-                    </div>
-                    <div class="col-sm-2">
-                        <label class="col-sm-1 control-label">保</label>
-                        <input type="text" name="optionsText" class="col-sm-4">
-                        <label class="control-label">年</label>
-                    </div>
-                    <label class="col-sm-1 control-label">②</label>
-                    <div class="col-sm-2">
-                        <label class="col-sm-1 control-label">交</label>
-                        <input type="text" name="optionsText" class="col-sm-4">
-                        <label class="control-label">年</label>
-                    </div>
-                    <div class="col-sm-2">
-                        <label class="col-sm-1 control-label">保</label>
-                        <input type="text" name="optionsText" class="col-sm-4">
-                        <label class="control-label">年</label>
-                    </div>
-                    <div class="col-sm-3 col-sm-offset-8">
-                        <button class="button btn-success" class="col-sm-1">增加一个</button>
-                        <button class="button btn-warning" class="col-sm-1">删除最后一个</button>
+                    <div class="form-group">
+                        <label><span style="margin-left:100px;">女：</span></label>
+                        <div class="form-group">
+                            <div ng-repeat="femaleDiffSexDiffDates in femaleDiffSexDiffDateArr">
+                                <label class="col-sm-2 control-label">{{$index+1}}</label>
+                                <div class="col-sm-2">
+                                    <label class="col-sm-1 control-label">交</label>
+                                    <input type="text" name="optionsText" class="col-sm-4">
+                                    <label class="control-label">年</label>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label class="col-sm-1 control-label">保</label>
+                                    <input type="text" name="optionsText" class="col-sm-4">
+                                    <label class="control-label">年</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-sm-offset-8 text-right">
+                            <button class="button btn-success" class="col-sm-1"
+                                    ng-click=" addFemalemale()">增加一个
+                            </button>
+                            <button class="button btn-danger" class="col-sm-1"
+                                    ng-show="femaleDiffSexDiffDateValue==1" ng-click="removeFemaleDiffSexDiffDate()">
+                                删除最后一个
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <!--种类标签-->
                 <div class="line line-dashed b-b line-lg pull-in"></div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">种类标签</label>
-                    <div class="col-sm-3">
-                        <select class="form-control m-t" ng-model="typeLabelSelection"
-                                ng-options="typeLabel.name for typeLabel in typeLabels" required>
-                            <option>{{typeLabelSelection.name}}</option>
-                        </select>
+                    <div class="col-sm-10">
+                        <label class="checkbox-inline i-checks" ng-repeat="typeLabel in typeLabels"
+                               ng-model="typeLabel">
+                            <input type="checkbox" value="typeLabel.value"><i></i> {{typeLabel.name}}
+                        </label>
                     </div>
                 </div>
                 <!--性别限制-->
@@ -467,6 +474,7 @@
                     <label class="col-sm-2 control-label">性别限制</label>
                     <div class="col-sm-3">
                         <select class="form-control m-t" ng-model="initGenderLimited"
+                                ng-change="genderLimitedChange(initGenderLimited.value)"
                                 ng-options="genderLimited.name for genderLimited in genderLimiteds">
                             <option>{{initGenderLimited.name}}</option>
                         </select>
@@ -476,14 +484,10 @@
                 <div class="line line-dashed b-b line-lg pull-in"></div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">描述标签</label>
-                    <div class="col-sm-10" ng-repeat="labelDescriptions in labelDescriptionsArr">
-                        <input type="text" name="labelDescription"
-                               ng-model="labelDescriptions.labelDescription" class="col-sm-3">
-                        <!--<input type="text" name="labelDescription" class="col-sm-4">-->
-                        <!--<input type="text" name="labelDescription" class="col-sm-4">-->
-                        <!--<input type="text" name="labelDescription" class="col-sm-4">-->
-                        <!--<input type="text" name="labelDescription" class="col-sm-4">-->
-                        <!--<input type="text" name="labelDescription" class="col-sm-4">-->
+                    <div class="col-sm-6">
+                        <input type="text" ng-repeat="labelDescriptions in labelDescriptionsArr"
+                               name="labelDescription" class="col-sm-4"
+                               ng-model="labelDescriptions.labelDescription">
                     </div>
                 </div>
                 <!--交费方式-->
@@ -491,36 +495,38 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">交费方式</label>
                     <div class="col-sm-10">
-                        <label class="checkbox-inline i-checks">
-                            <input type="checkbox" value="option1"><i></i> 趸交
-                        </label>
-                        <label class="checkbox-inline i-checks">
-                            <input type="checkbox" value="option2"><i></i> 期缴
+                        <label class="checkbox-inline i-checks" ng-repeat="incomeTypeList in incomeTypeLists"
+                               ng-model="incomeTypeList">
+                            <input type="checkbox" checkbox-options ng-value="incomeTypeList.value"><i></i>
+                            {{incomeTypeList.name}}
                         </label>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">交费期间(年)</label>
-                    <div class="col-sm-10">
-                        <input type="text" name="optionsText" class="col-sm-1">
-                        <input type="text" name="optionsText" class="col-sm-1">
-                        <input type="text" name="optionsText" class="col-sm-1">
-                        <input type="text" name="optionsText" class="col-sm-1">
-                        <input type="text" name="optionsText" class="col-sm-1">
-                        <button class="button button-success" class="col-sm-1">增加</button>
+                    <div class="col-sm-6">
+                        <input type="text" name="incomePeriod" class="col-sm-2"
+                               ng-repeat="incomePeriods in incomePeriodArr" my-blur
+                               ng-model="incomePeriods.incomePeriod">
                     </div>
+                    <button class="button btn-success" class="addIncomePeriod"
+                            ng-click="addIncomePeriod()">增加
+                    </button>
+                    <button class="button btn-danger" class="removeIncomePeriod" ng-show="num==4"
+                            ng-click="removeIncomePeriod()">删除
+                    </button>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">交费年上限</label>
                     <div class="col-sm-3">
-                        <input type="text" name="optionsText" class="col-sm-4">周岁
+                        <input type="text" payment-blur name="MaxPayment" class="col-sm-4">周岁
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">交费频率</label>
                     <div class="col-sm-3">
                         <label class="col-sm-1 control-label">每</label>
-                        <input type="text" name="optionsText" class="col-sm-4">
+                        <input type="text" name="interval" interval-blur class="col-sm-4">
                         <label class="control-label">年</label>
                     </div>
                 </div>
@@ -529,16 +535,11 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">年金领取方式</label>
                     <div class="col-sm-10">
-                        <div class="radio col-sm-4">
+                        <div class="radio col-sm-4" ng-repeat="yearMoneyType in yearMoneyTypes">
                             <label>
-                                <input type="radio" name="optionsRadios" value="option1" checked>
-                                周岁
+                                <input type="radio" name="yearMoneyType" ng-model="yearMoneyType.value">
+                                {{yearMoneyType.name}}
                             </label>
-                        </div>
-                        <div class="radio col-sm-4">
-                            <label>
-                                <input type="radio" name="optionsRadios" value="option2">
-                                合同生效后第几年</label>
                         </div>
                     </div>
                 </div>
@@ -547,9 +548,9 @@
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <label class="col-sm-2 control-label">承保职业</label>
                     <div class="col-sm-10">
-                        <input type="text" name="optionsText" class="col-sm-1">
-                        <label class="col-sm-1">------------</label>
-                        <input type="text" name="optionsText" class="col-sm-1">类
+                        <input type="text" job-blur name="jobType" class="col-sm-1">
+                        <label class="col-sm-1">--------</label>
+                        <input type="text" job-blur name="jobType" class="col-sm-1">类
                     </div>
                 </div>
                 <!--利率设定-->
@@ -557,465 +558,355 @@
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <label class="col-sm-2 control-label">利率设定</label>
                     <div class="col-sm-10">
-                        <input type="text" name="optionsText" class="col-sm-1">
-                        <input type="text" name="optionsText" class="col-sm-1">
-                        <input type="text" name="optionsText" class="col-sm-1">(若不设定，则按照默认利率计算)
+                        <input type="text" rate-blur name="rate" class="col-sm-1">
+                        <input type="text" rate-blur name="rate" class="col-sm-1">
+                        <input type="text" rate-blur name="rate" class="col-sm-1">(若不设定，则按照默认利率计算)
                     </div>
                 </div>
                 <!--保障项目管理-->
-                <div class="bg-light lter b-b wrapper-md">
-                    <h1 class="m-n font-thin h3">保障项目管理</h1>
-                </div>
-                <div class="line line-dashed b-b line-lg pull-in"></div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">项目全称1</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control">
+                <div ng-repeat="addNewGuaranteeProject in addNewGuaranteeProjectArr">
+                    <div class="bg-light lter b-b wrapper-md">
+                        <h1 class="m-n font-thin h3">保障项目管理</h1>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">项目全称1</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" maxlength="20"
+                                   placeholder="若pc端和移动端名称一样，只需填此一项即可"
+                                   ng-model="form.projectName">
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">项目简称</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" maxlength="10">
+                        </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">项目内容描述</label>
+                        <div class="col-sm-6">
+                        <textarea type="text" class="form-control" maxlength="500"
+                                  ng-model="form.projectDescription"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-10  col-sm-push-2">
+                            <label class="checkbox-inline i-checks"
+                                   ng-repeat="incomeType in addNewGuaranteeProject.incomeTypes">
+                                <input type="checkbox" ng-value="incomeType.value"
+                                ><i></i>{{incomeType.name}}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">病种信息</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control"/>
+                        </div>
+                    </div>
+                    <!--文本编辑器-->
+                    <div class="form-group">
+                        <div class="col-sm-8 text-rignt">
+                            <div class="WrapperDisease">
+                                <div lazy-load="textAngular">
+                                    <div text-angular class="btn-groups" ng-model="disease.html"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--保障期限-->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">保障期限： 下限</label>
+                        <div class="col-sm-3">
+                            <label>
+                                <input type="text" name="guaranteePeriod" placeholder="无下限则不填"
+                                       guarantee-blur ng-model="form.guaranteePeriodOff">
+                                <select name="guaranteeAge" class="guaranteeAge" ng-model="firstGuaranteeAge"
+                                        ng-options="guaranteeAge.name for guaranteeAge in guaranteeAges">
+                                    <option>{{firstGuaranteeAge.name}}</option>
+                                </select>
+                            </label>
+                        </div>
+                        <label class="col-sm-2 control-label">上限：</label>
+                        <div class="col-sm-3">
+                            <label>
+                                <input type="text" name="guaranteePeriod" placeholder="终身则不填"
+                                       guarantee-blur ng-model="form.guaranteePeriodUp">
+                                <select name="guaranteeAge" class="guaranteeAge" ng-model="first_guaranteeAge"
+                                        ng-options="guaranteeAge.name for guaranteeAge in guaranteeAges">
+                                    <option>{{first_guaranteeAge.name}}</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <!--受益方式-->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">受益方式</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline" ng-repeat="detailListType in detailListTypes">
+                                <input type="radio" ng-model="detailListType.value" name="detailList"
+                                       value="detailListType.value"><i></i> {{detailListType.name}}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">受益频率</label>
+                        <div class="col-sm-3">
+                            <input type="text" my-blur name="benefitFrequency" class="col-sm-4"
+                                   ng-model="formData.benefitFrequency">
+                            <label class="control-label">年</label>
+                        </div>
+                    </div>
+                    <!--受益金额-->
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">受益金额（请选择以下一种方式输入）</label>
+                        <div class="col-sm-10 col-sm-push-2">
+                            <label>
+                                <input type="radio" name="benefitAmount" ng-value="fixValue">固定值：
+                            </label>
+                            <label>
+                                <input type="text" maxlength="10" name="benefitAmount" benefit-blur>
+                                <select name="age" class="age" ng-model="benefitAmountion"
+                                        ng-options="benefitAmount.name for benefitAmount in benefitAmounts"
+                                        ng-change="benefitAmountChange(benefitAmountion.name)">
+                                    <option value="age">{{benefitAmount.name}}</option>
+                                </select>
+                            </label>
+                        </div>
+                        <div class="col-sm-10 col-sm-push-2">
+                            <label>
+                                <input type="radio" name="benefitAmount">比例倍数
+                            </label>
+                            <label>
+                                <select name="valueType" class="valueType" ng-model="firstValueType"
+                                        ng-options="valueType.name for valueType in valueTypes">
+                                    <option>{{valueType.name}}</option>
+                                </select>
+                                <label>*</label>
+                                <input type="text" name="valueType" value-blur>%
+                            </label>
+                        </div>
+                        <div class="col-sm-10 col-sm-push-2">
+                            <label>
+                                <input type="radio" name="benefitAmount">逐年递增
+                            </label>
+                            <label>
+                                <select name="valueType" class="valueType" ng-model="everyYearAdd"
+                                        ng-options="valueType.name for valueType in valueTypes">
+                                    <option>{{valueType.name}}</option>
+                                </select>
+                                <label>*</label>
+                                <input type="text" name="valueType" value-blur>%（每年递增
+                                <input type="text" name="valueType" value-blur>%）
+                            </label>
+                        </div>
+                        <div class="col-sm-10 col-sm-push-2">
+                            <label>
+                                <input type="radio" name="benefitAmount">阶段比例
+                            </label>
+                            <label>首年：</label>
+                            <label>
+                                <select name="valueType" class="valueType" ng-model="firstValue"
+                                        ng-options="valueType.name for valueType in valueTypes">
+                                    <option>{{valueType.name}}</option>
+                                </select>
+                                <label>*</label>
+                                <input type="text" name="valueType" value-blur>%<br>
+                                <select name="stageRate" class="stageRate" ng-model="firstStageRate"
+                                        ng-options="StageRate.name for StageRate in StageRates">
+                                    <option value="stageRate">{{StageRate.name }}</option>
+                                </select>
+                                <label>至第</label>
+                                <input type="text" name="stageRate" placeholder="终身请空填"
+                                       stage-blur>年：
+                                <select name="valueType" class="valueType" ng-model="stageValue"
+                                        ng-options="valueType.name for valueType in valueTypes">
+                                    <option>{{valueType.name}}</option>
+                                </select>
+                                <label>*</label>
+                                <input type="text" name="valueType" value-blur>%
+                            </label>
+                        </div>
                     </div>
                 </div>
-                <div class="line line-dashed b-b line-lg pull-in"></div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">项目简称</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control">
-                    </div>
-                </div>
-                <div class="line line-dashed b-b line-lg pull-in"></div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">项目内容描述</label>
-                    <div class="col-sm-6">
-                        <textarea type="text" class="form-control"></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-10  col-sm-push-2">
-                        <label class="checkbox-inline i-checks">
-                            <input type="checkbox" value="option1"><i></i> 进万能账户
-                        </label>
-                        <label class="checkbox-inline i-checks">
-                            <input type="checkbox" value="option2"><i></i> 进意外身价
-                        </label>
-                        <label class="checkbox-inline i-checks">
-                            <input type="checkbox" value="option1"><i></i> 进健康保障
-                        </label>
-                        <label class="checkbox-inline i-checks">
-                            <input type="checkbox" value="option2"><i></i> 进疾病身故
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">是否属于重轻疾保障</label>
-                    <div class="col-sm-2">
-                        <input type="radio" name="optionsRadios">重疾
-                    </div>
-                    <div class="col-sm-2">
-                        <input type="radio" name="optionsRadios">轻疾
-                    </div>
-                    <div class="col-sm-2">
-                        <input type="radio" name="optionsRadios">重疾+轻疾
-                    </div>
-                    <label class="col-sm-2 control-label">（若都不是则无需勾选）</label>
-                </div>
-                <!--保障期限-->
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">保障期限： 下限</label>
-                    <div class="col-sm-3">
-                        <label>
-                            <input type="text" name="optionsText" checked>
-                            周岁
-                        </label>
-                    </div>
-                    <label class="col-sm-2 control-label">上限：</label>
-                    <div class="col-sm-3">
-                        <label>
-                            <input type="text" name="optionsText" checked>
-                            周岁
-                        </label>
-                    </div>
-                </div>
-                <!--受益方式-->
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">受益方式</label>
-                    <div class="col-sm-10">
-                        <label class="radio-inline">
-                            <input type="radio" value="option1"><i></i> 一次
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" value="option2"><i></i> 按频次
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">受益频率</label>
-                    <div class="col-sm-3">
-                        <input type="text" name="optionsText" class="col-sm-4">
-                        <label class="control-label">年</label>
-                    </div>
-                </div>
-                <!--受益金额-->
-                <div class="form-group">
-                    <label class="col-sm-4 control-label">受益金额（请选择以下一种方式输入）</label>
-                    <div class="col-sm-10 col-sm-push-2">
-                        <input type="radio" name="optionsRadios">固定值：
-                        <label>
-                            <input type="text" name="optionsText">
-                            <select name="age" class="age">
-                                <option value="age">元</option>
-                                <option value="day">元/天</option>
-                                <option value="day">元/月</option>
-                                <option value="day">元/年</option>
-                            </select>
-                        </label>
-                    </div>
-                    <div class="col-sm-10 col-sm-push-2">
-                        <input type="radio" name="optionsRadios">比例倍数
-                        <label>
-                            <select name="age" class="age">
-                                <option value="age">保额</option>
-                                <option value="day">保费</option>
-                            </select>
-                            <label>*</label>
-                            <input type="text" name="optionsText">%
-                        </label>
-                    </div>
-                    <div class="col-sm-10 col-sm-push-2">
-                        <input type="radio" name="optionsRadios">逐年递增
-                        <label>
-                            <select name="age" class="age">
-                                <option value="age">保额</option>
-                                <option value="day">保费</option>
-                            </select>
-                            <label>*</label>
-                            <input type="text" name="optionsText">%（每年递增
-                            <input type="text" name="optionsText">%）
-                        </label>
-                    </div>
-                    <div class="col-sm-10 col-sm-push-2">
-                        <input type="radio" name="optionsRadios">阶段比例
-                        <label>首年：</label>
-                        <label>
-                            <select name="age" class="age">
-                                <option value="age">保额</option>
-                                <option value="day">保费</option>
-                            </select>
-                            <label>*</label>
-                            <input type="text" name="optionsText">%<br>
-                            <select name="age" class="age">
-                                <option value="age">第二年</option>
-                                <option value="day">第三年</option>
-                                <option value="day">......</option>
-                            </select>
-                            <label>至第</label>
-                            <input type="text" name="optionsText" placeholder="终身请空填">年：
-                            <select name="age" class="age">
-                                <option value="age">保额</option>
-                                <option value="day">保费</option>
-                            </select>
-                            <label>*</label>
-                            <input type="text" name="optionsText">%
-                        </label>
-                    </div>
-                </div>
-                <button class="btn bg-info big add_project">添加新保障项目</button>
+                <button class="btn bg-info big add_project" ng-click="addNewGuaranteeProject()">添加新保障项目</button>
+                <button class="btn btn-danger big remove_project" ng-click="removeGuaranteeProject()">删除保障项目</button>
                 <!--费率设置-->
                 <div class="bg-light lter b-b wrapper-md">
                     <h1 class="m-n font-thin h3">费率设置</h1>
                 </div>
                 <div class="line line-dashed b-b line-lg pull-in"></div>
                 <div class="form-group">
-                    <div class="col-sm-2 col-sm-push-1">
-                        <input type="radio" name="optionsText">单一条件:
+                    <label class="col-sm-2 col-sm-push-1">
+                        <input type="radio" name="ratesSchedule">单一条件:
+                    </label>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-10" ng-repeat="addFactorList in addFactorListArr">
+                        <label class="col-sm-2 control-label">领取年龄：</label>
+                        <div class="col-sm-2">
+                            <input type="text" baofei-blur name="year" class="col-sm-6">周岁
+                        </div>
+                        <div class="col-sm-2">
+                            <label> 性别：
+                                <select name="sex" class="sex" ng-model="initSex"
+                                        ng-change="genderLimitedChange(initSex.value)"
+                                        ng-options="genderLimited.name for genderLimited in genderLimiteds">
+                                    <option value="buxian">{{initSex.name}}</option>
+                                </select>
+                            </label>
+                        </div>
+                        <div class="col-sm-3">
+                            <label>缴费期限：</label>
+                            <label>
+                                <select name="date" class="date"
+                                        ng-options="paymentPeriod.name for paymentPeriod in paymentPeriods"
+                                        ng-model="firstPaymentPeriod">
+                                    <option value="paymentPeriod">{{paymentPeriod.name}}</option>
+                                </select>
+                            </label>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="col-sm-5">保费：</label>
+                            <input type="text" baofei-blur name="baofei" class="col-sm-5">
+                            <label class="col-sm-2">元</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="col-sm-6 text-right">保额：</label>
+                            <input type="text" baofei-blur name="baoe" class="col-sm-3">元
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="col-sm-6">社保：</label>
+                            <select name="shebao" ng-options="socialSecuity.name for socialSecuity in socialSecuitys"
+                                    ng-model="secondSocialSecuity">
+                                <option value="no_different">{{socialSecuity.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 pull-right text-right">
+                        <button class="btn btn-success" ng-click="addRateCondition()">新增</button>
+                        <button class="btn btn-danger" ng-show="factorList==1"
+                                ng-click="removeLastRateCondition()">删除
+                        </button>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">领取年龄：</label>
-                    <div class="col-sm-2">
-                        <input type="text" name="bili" class="col-sm-6">周岁
-                    </div>
-                    <div class="col-sm-2">
-                        <label> 性别：
-                            <select name="sex" class="sex">
-                                <option value="buxian">不限</option>
-                                <option value="male">男</option>
-                                <option value="female">女</option>
-                            </select>
-                        </label>
-                    </div>
-                    <div class="col-sm-2">
-                        <label>缴费期限：</label>
-                        <label>
-                            <select name="date" class="date">
-                                <option value="dun">趸交</option>
-                                <option value="yi">一年</option>
-                                <option value="er">二年</option>
-                                <option value="san">三年</option>
-                                <option value="si">四年</option>
-                                <option value="day">......</option>
-                                <option value="fifty">五十年</option>
-                            </select>
-                        </label>
-                    </div>
-                    <div class="col-sm-2">
-                        <label class="col-sm-6">保费：</label>
-                        <input type="text" name="optionsText" class="col-sm-4">元
-                    </div>
-                    <div class="col-sm-2">
-                        <label class="col-sm-6">保额：</label>
-                        <input type="text" name="optionsText" class="col-sm-4   ">元
-                    </div>
-                    <div class="col-sm-2   col-sm-pull-6">
-                        <label>社保：</label>
-                        <label>
-                            <select name="shebao">
-                                <option value="no_different">无区别</option>
-                                <option value="has" selected>有</option>
-                                <option value="no">无</option>
-                            </select>
-                        </label>
-                    </div>
-                    <div class="col-sm-2 col-sm-pull-6">
-                        <button class="btn bg-success add_new">新增</button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-2 col-sm-push-1">
-                        <input type="radio" name="optionsText">费率表设置:
-                    </div>
+                    <label class="col-sm-2 col-sm-push-1">
+                        <input type="radio" name="ratesSchedule">费率表设置:
+                    </label>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">费率表类型：</label>
                     <div class="col-sm-10">
-                        <label class="radio-inline">
-                            <input type="radio" value="option1"><i></i> 保费算保额
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" value="option2"><i></i> 保额算保费
+                        <label class="radio-inline" ng-repeat="rateTableType in rateTableTypes">
+                            <input type="radio" ng-value="rateTableType.value"
+                                   ng-click="typeChange(rateTableType.value)"
+                                   ng-checked="rateTableType.check" name="rateTable"><i></i>
+                            {{rateTableType.name}}
                         </label>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">导入EXCEL：</label>
-                    <button class="btn btn-warning btn-lg">点击上传excel文件</button>
+                    <input type="file" nv-file-select="" uploader="uploader"/>
                 </div>
                 <!--设置数据列条件-->
                 <div class="form-group">
                     <div class="col-sm-2 col-sm-push-1">
-                        <input type="radio" name="optionsText">设置数据列条件:
+                        设置数据列条件:
                     </div>
                 </div>
-                <table>
-                    <tr><!--第一列条件-->
-                        <td>
-                            <div class="form-group col_one">
-                                <label class="col-sm-2 control-label">第一列条件 </label>
-                                <div class="col-sm-3">
-                                    <label class="col-sm-5">领取年龄：</label>
-                                    <input type="text" name="bili" class="col-sm-4">周岁
-                                </div>
-                                <div class="col-sm-2 sex">
-                                    <label> 性别：
-                                        <select name="sex" class="sex">
-                                            <option value="buxian">不限</option>
-                                            <option value="male">男</option>
-                                            <option value="female">女</option>
-                                        </select>
-                                    </label>
-                                </div>
-                                <div class="col-sm-2 date_jiaofei">
-                                    <label>缴费期限：</label>
-                                    <label>
-                                        <select name="date" class="date">
-                                            <option value="dun">趸交</option>
-                                            <option value="yi">一年</option>
-                                            <option value="er">二年</option>
-                                            <option value="san">三年</option>
-                                            <option value="si">四年</option>
-                                            <option value="day">......</option>
-                                            <option value="fifty">五十年</option>
-                                        </select>
-                                    </label>
-                                </div>
-                                <div class="col-sm-2 baifei">
-                                    <label class="col-sm-6">保费：</label>
-                                    <input type="text" name="optionsText" class="col-sm-4">元
-                                </div>
-                                <div class="col-sm-2 shebao">
-                                    <label>社保：</label>
-                                    <label>
-                                        <select name="shebao">
-                                            <option value="no_different">无区别</option>
-                                            <option value="has" selected>有</option>
-                                            <option value="no">无</option>
-                                        </select>
-                                    </label>
-                                </div>
-                                <div class="col-sm-2 col-sm-pull-5">
-                                    <button class="btn bg-success add_new">新增</button>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr><!--第二列条件-->
-                        <td>
-                            <div class="form-group col_two">
-                                <label class="col-sm-2 control-label">第二列条件 </label>
-                                <div class="col-sm-3">
-                                    <label class="col-sm-5">领取年龄：</label>
-                                    <input type="text" name="bili" class="col-sm-4">周岁
-                                </div>
-                                <div class="col-sm-2 sex">
-                                    <label> 性别：
-                                        <select name="sex" class="sex">
-                                            <option value="buxian">不限</option>
-                                            <option value="male">男</option>
-                                            <option value="female">女</option>
-                                        </select>
-                                    </label>
-                                </div>
-                                <div class="col-sm-2 date_jiaofei">
-                                    <label>缴费期限：</label>
-                                    <label>
-                                        <select name="date" class="date">
-                                            <option value="dun">趸交</option>
-                                            <option value="yi">一年</option>
-                                            <option value="er">二年</option>
-                                            <option value="san">三年</option>
-                                            <option value="si">四年</option>
-                                            <option value="day">......</option>
-                                            <option value="fifty">五十年</option>
-                                        </select>
-                                    </label>
-                                </div>
-                                <div class="col-sm-2 baifei">
-                                    <label class="col-sm-6">保费：</label>
-                                    <input type="text" name="optionsText" class="col-sm-4">元
-                                </div>
-                                <div class="col-sm-2 shebao">
-                                    <label>社保：</label>
-                                    <label>
-                                        <select name="shebao">
-                                            <option value="no_different">无区别</option>
-                                            <option value="has" selected>有</option>
-                                            <option value="no">无</option>
-                                        </select>
-                                    </label>
-                                </div>
-                                <div class="col-sm-2 col-sm-pull-5">
-                                    <button class="btn bg-success add_new">新增</button>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr><!--第三列条件-->
-                        <td>
-                            <div class="form-group col_three">
-                                <label class="col-sm-2 control-label">第三列条件 </label>
-                                <div class="col-sm-3">
-                                    <label class="col-sm-5">领取年龄：</label>
-                                    <input type="text" name="bili" class="col-sm-4">周岁
-                                </div>
-                                <div class="col-sm-2 sex">
-                                    <label> 性别：
-                                        <select name="sex" class="sex">
-                                            <option value="buxian">不限</option>
-                                            <option value="male">男</option>
-                                            <option value="female">女</option>
-                                        </select>
-                                    </label>
-                                </div>
-                                <div class="col-sm-2 date_jiaofei">
-                                    <label>缴费期限：</label>
-                                    <label>
-                                        <select name="date" class="date">
-                                            <option value="dun">趸交</option>
-                                            <option value="yi">一年</option>
-                                            <option value="er">二年</option>
-                                            <option value="san">三年</option>
-                                            <option value="si">四年</option>
-                                            <option value="day">......</option>
-                                            <option value="fifty">五十年</option>
-                                        </select>
-                                    </label>
-                                </div>
-                                <div class="col-sm-2 baifei">
-                                    <label class="col-sm-6">保费：</label>
-                                    <input type="text" name="optionsText" class="col-sm-4">元
-                                </div>
-                                <div class="col-sm-2 shebao">
-                                    <label>社保：</label>
-                                    <label>
-                                        <select name="shebao">
-                                            <option value="no_different">无区别</option>
-                                            <option value="has" selected>有</option>
-                                            <option value="no">无</option>
-                                        </select>
-                                    </label>
-                                </div>
-                                <div class="col-sm-2 col-sm-pull-5">
-                                    <button class="btn bg-success add_new">新增</button>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button class="btn btn-success add">增加</button>
-                            <button class="btn btn-success remove">删除</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <!--默认条件设定-->
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">默认条件设定 </label>
-                                <div class="col-sm-3">
-                                    <label class="col-sm-5">领取年龄：</label>
-                                    <input type="text" name="bili" class="col-sm-4">周岁
-                                </div>
-                                <div class="col-sm-2 sex">
-                                    <label> 性别：
-                                        <select name="sex" class="sex">
-                                            <option value="buxian">不限</option>
-                                            <option value="male">男</option>
-                                            <option value="female">女</option>
-                                        </select>
-                                    </label>
-                                </div>
-                                <div class="col-sm-2 date_jiaofei">
-                                    <label>缴费期限：</label>
-                                    <label>
-                                        <select name="date" class="date">
-                                            <option value="dun">趸交</option>
-                                            <option value="yi">一年</option>
-                                            <option value="er">二年</option>
-                                            <option value="san">三年</option>
-                                            <option value="si">四年</option>
-                                            <option value="day">......</option>
-                                            <option value="fifty">五十年</option>
-                                        </select>
-                                    </label>
-                                </div>
-                                <div class="col-sm-2 baifei">
-                                    <label class="col-sm-6">保费：</label>
-                                    <input type="text" name="optionsText" class="col-sm-4">元
-                                </div>
-                                <div class="col-sm-2 shebao">
-                                    <label>社保：</label>
-                                    <label>
-                                        <select name="shebao">
-                                            <option value="no_different">无区别</option>
-                                            <option value="has" selected>有</option>
-                                            <option value="no">无</option>
-                                        </select>
-                                    </label>
-                                </div>
-                                <div class="col-sm-2 col-sm-pull-5">
-                                    <button class="btn bg-success add_new">新增</button>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
+                <!--前三列条件-->
+                <div class="form-group col_three" ng-repeat="condition in conditionArr"
+                     ng-model="conditionArr">
+                    <label class="col-sm-2 control-label">第{{$index+1}}列条件 </label>
+                    <div class="col-sm-3">
+                        <label class="col-sm-5">领取年龄：</label>
+                        <input type="text" name="year" baofei-blur class="col-sm-4">周岁
+                    </div>
+                    <div class="col-sm-2 sex">
+                        <label> 性别：
+                            <select name="sex" class="sex" ng-model="initSex"
+                                    ng-change="genderLimitedChange(initSex.value)"
+                                    ng-options="genderLimited.name for genderLimited in genderLimiteds">
+                                <option value="buxian">{{initSex.name}}</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="col-sm-2 date_jiaofei">
+                        <label>缴费期限：</label>
+                        <label>
+                            <select name="date" class="date"
+                                    ng-options="paymentPeriod.name for paymentPeriod in paymentPeriods"
+                                    ng-model="firstPaymentPeriod">
+                                <option value="paymentPeriod">{{paymentPeriod.name}}</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="col-sm-2 baifei" ng-show="rateTableValue==1">
+                        <label class="col-sm-6">保费：</label>
+                        <input type="text" name="baofei" baofei-blur class="col-sm-4">元
+                    </div>
+                    <div class="col-sm-2 baifei" ng-show="rateTableValue==2">
+                        <label class="col-sm-6">保额：</label>
+                        <input type="text" name="baofei" baofei-blur class="col-sm-4">元
+                    </div>
+                    <div class="col-sm-2 shebao">
+                        <label>社保：</label>
+                        <label>
+                            <select name="shebao" ng-options="socialSecuity.name for socialSecuity in socialSecuitys"
+                                    ng-model="secondSocialSecuity">
+                                <option value="no_different">{{socialSecuity.name}}</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <button class="btn btn-success add" ng-click="addCondition()">增加</button>
+                <button class="btn btn-danger remove" ng-show="condition==1" ng-click="removeCondition()">删除</button>
+                <!--默认条件设定-->
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">默认条件设定 </label>
+                    <div class="col-sm-3">
+                        <label class="col-sm-5">领取年龄：</label>
+                        <input type="text" name="year" baofei-blur class="col-sm-4">周岁
+                    </div>
+                    <div class="col-sm-2 sex">
+                        <label> 性别：
+                            <select name="sex" class="sex" ng-model="morenSex"
+                                    ng-change="genderLimitedChange(morenSex.value)"
+                                    ng-options="genderLimited.name for genderLimited in genderLimiteds">
+                                <option value="buxian">{{morenSex.name}}</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="col-sm-2 date_jiaofei">
+                        <label>缴费期限：</label>
+                        <label>
+                            <select name="date" class="date"
+                                    ng-options="paymentPeriod.name for paymentPeriod in paymentPeriods"
+                                    ng-model="morenPaymentPeriod">
+                                <option value="paymentPeriod">{{paymentPeriod.name}}</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="col-sm-2 baifei">
+                        <label class="col-sm-6">保费：</label>
+                        <input type="text" baofei-blur name="baofei" class="col-sm-4">元
+                    </div>
+                    <div class="col-sm-2 shebao">
+                        <label>社保：</label>
+                        <label>
+                            <select name="shebao" ng-options="socialSecuity.name for socialSecuity in socialSecuitys"
+                                    ng-model="morenSocialSecuity">
+                                <option value="no_different">{{socialSecuity.name}}</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
 
                 <!--常见问题设置-->
                 <div class="bg-light lter b-b wrapper-md">
@@ -1023,7 +914,7 @@
                 </div>
                 <div class="wrapper-md">
                     <div lazy-load="textAngular">
-                        <div text-angular ng-model="htmlVariable1" class="btn-groups"></div>
+                        <div text-angular ng-model="FAQ" class="btn-groups"></div>
                     </div>
                 </div>
                 <!--理赔指南-->
@@ -1032,7 +923,7 @@
                 </div>
                 <div class="wrapper-md">
                     <div lazy-load="textAngular">
-                        <div text-angular ng-model="htmlVariable2" class="btn-groups"></div>
+                        <div text-angular ng-model="claimsGuide" class="btn-groups"></div>
                     </div>
                 </div>
                 <!--保险条款管理-->
@@ -1040,18 +931,21 @@
                     <h1 class="m-n font-thin h3">保险条款管理</h1>
                 </div>
                 <div class="line line-dashed b-b line-lg pull-in"></div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">条款名称:</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control">
+                <div ng-repeat="insuranceClauses in insuranceClausesArr">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">条款名称:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">上传条款文档：</label>
+                        <input type="file" nv-file-select="" uploader="uploader" class="col-sm-2"/>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">上传条款文档：</label>
-                    <button class="btn btn-warning btn-sm">点击上传</button>
-                </div>
-                <button class="btn bg-info big add_tiaokuan">添加新条款</button>
-                <button type="submit" ng-click="submit(formData)">保存并提交</button>
+                <button class="btn bg-info big add_tiaokuan" ng-click="addNewInsuranceClauses()">添加新条款</button>
+                <button class="btn btn-danger big remove_tiaokuan" ng-click="removeInsuranceClauses()">删除条款</button>
+                <button type="submit" ng-click="submit()">保存并提交</button>
             </form>
         </div>
     </div>
